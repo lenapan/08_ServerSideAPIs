@@ -75,11 +75,11 @@
           var query_param = $(this).prev().val();
 
           if ($(this).prev().attr("id") == "search-value") {
-              var weather = "http://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&units=imperial" + "&APPID=" + APIKey;
+              var weather = "https://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&units=imperial" + "&APPID=" + APIKey;
           } 
           $.getJSON(weather,function(json){
               $("#city").html(json.name); today.append(now);
-              $("#weather_image").attr("src", "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
+              $("#weather_image").attr("src", "https://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
               $("#temperature").html("Temperature: " + json.main.temp + " °F"); //shift + option + 8 to get degree symbol on a Mac
               $("#humidity").html("Humidity: " + json.main.humidity + "%");
               $("#wind").html("Wind Speed: " + json.wind.speed + " MPH");
