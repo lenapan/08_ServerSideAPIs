@@ -3,6 +3,7 @@
  const now = dayjs().format('(M/DD/YYYY)'); 
  const history = document.getElementById("history");
  const container = document.getElementsByClassName("container-fluid");
+ const input = document.getElementById("search-value");
 
   $( document ).ready(function() {
 
@@ -25,7 +26,7 @@
             localStorage.setItem("City", json.name);
             var li = document.createElement("li");
             li.textContent = localStorage.getItem("City");
-            history.appendChild(li);
+            history.prepend(li);
         });
           console.log(weather);
           console.log(forecast); 
@@ -67,8 +68,23 @@
               p2.textContent = json.list[i].humidity + " %";
               p2.setAttribute("class", "col");      
             }  
-            var input = document.getElementById("search-value");
             input.value = "";   //clear previous search in <input> once response is complete      
         });  
     })
   });
+  input.addEventListener("click", function(){
+    document.getElementById("search-button").onclick = function(){
+      $("#city").html(""); today.textContent = ""; 
+      $("#weather_image").attr("src", "");
+      $("#temperature").html(""); 
+      $("#humidity").html("");
+      $("#wind").html("");
+      var h3 = document.querySelector('h3');
+      h3.textContent= "";
+      date.textContent = "";
+      icon.textContent = "";
+      forecast.textContent = "";
+      forecast2.textContent ="";
+    }
+    
+  })
