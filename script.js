@@ -25,24 +25,23 @@
               cityList = []; 
             }
             var city = json.name;           
-            localStorage.setItem("city", city);
-            cityList.push(city); //push the current city to the cityList array
-            localStorage.setItem("allCities", JSON.stringify(cityList)); //save new city list
+            if (cityList.indexOf(city) == -1){ // to ensure a duplicate value does not get recorded in the 'cityList' array
+              cityList.push(city); //push the current city you entered to the cityList array
 
-            var li = document.createElement("li");
-            li.setAttribute("id", city);
-            li.textContent = localStorage.getItem("city");
-            history.prepend(li);
-            // for (var i = 0; i < cityList.length; i++){
-            //   var listingCity = cityList[i];  
-            //   var li = document.createElement("li");
-            //   li.textContent = listingCity;
-            //   history.prepend(li);
-            // }       
-            
+              //create the list with a value and id matching the city you last searched for
+              var li = document.createElement("li");
+              li.setAttribute("id", city);
+              li.textContent = city;
+
+              //add <li> to unordered list whose id is "history"
+              history.prepend(li);
+            }          
+            localStorage.setItem("allCities", JSON.stringify(cityList)); //save new city list                     
         }); //End of getting the current weather info for city
+
           //  console.log(weather);
           //  console.log(forecast); 
+
         $.getJSON(forecast,function(json){
           
           var h3 = document.querySelector('h3');
@@ -101,3 +100,9 @@
       forecast2.textContent ="";
     }  
   })    
+  var listingCity = JSON.parse(localStorage.getItem("allCities"));
+  for (var i = 0; i < listingCity.length; i++){
+        var li = document.createElement("li");
+        li.textContent = listingCity[i];
+        history.prepend(li);
+      } 
