@@ -88,20 +88,22 @@
       getCityConditions();
     })  //End of addEventListener "click"
   }); // End of document ready
-
+  function clear (){
+    $("#city").html(""); today.textContent = ""; 
+    $("#weather_image").attr("src", "");
+    $("#temperature").html(""); 
+    $("#humidity").html("");
+    $("#wind").html("");
+    var h3 = document.querySelector('h3');
+    h3.textContent= "";
+    date.textContent = "";
+    icon.textContent = "";
+    forecast.textContent = "";
+    forecast2.textContent ="";
+  }
   input.addEventListener("click", function(){
     document.getElementById("search-button").onclick = function(){ //clear previous results before outputting new ones
-      $("#city").html(""); today.textContent = ""; 
-      $("#weather_image").attr("src", "");
-      $("#temperature").html(""); 
-      $("#humidity").html("");
-      $("#wind").html("");
-      var h3 = document.querySelector('h3');
-      h3.textContent= "";
-      date.textContent = "";
-      icon.textContent = "";
-      forecast.textContent = "";
-      forecast2.textContent ="";
+    clear();
     }  
   })    
   var listingCity = JSON.parse(localStorage.getItem("allCities"));
@@ -114,10 +116,10 @@
 
 $( document ).ready(function() {
     $('button').on("click", function(e){   
+        clear();
         var search_val = e.target.textContent;
-
-            var weather = "https://api.openweathermap.org/data/2.5/weather?q=" + search_val + "&units=imperial" + "&APPID=" + APIKey;
-            var forecast = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + search_val  + "&cnt=5" + "&units=imperial" + "&appid=" + APIKey;
+        var weather = "https://api.openweathermap.org/data/2.5/weather?q=" + search_val + "&units=imperial" + "&APPID=" + APIKey;
+        var forecast = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + search_val  + "&cnt=5" + "&units=imperial" + "&appid=" + APIKey;
 
         function getCityConditions(){
             $.getJSON(weather,function(json){
