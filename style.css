@@ -19,3 +19,18 @@ main {
   .c2{
     border-radius: 0 0 15px 15px;
   }
+  .u-index{
+    background-color: red;
+    color:#fff;
+    padding: 7px 20px;
+    border-radius: 10%;
+  }
+  .btn-primary{
+    background: #2596be;
+    border-color: #2596be;
+  }
+  /*Styling the history list of cities searched */
+  .btn-city{
+    border: 1px solid #fff;
+    padding: 15px 0;
+  }

@@ -20,8 +20,8 @@
     var lon = json.coord.lon;       var lat = json.coord.lat;
     var uv = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=daily,hourly,minutely&appid=" + APIKey;
     $.getJSON(uv, function(json){
-      $("#uv").text("UV Index: ");    $("#uvNum").text(json.current.uvi); $("#uvNum").css("background-color","red");
-      $("#uvNum").css("color","#fff"); $("#uvNum").css("padding","7px 20px"); $("#uvNum").css("border-radius","10%");
+      $("#uv").text("UV Index: ");    $("#uvNum").text(json.current.uvi); 
+      $("#uvNum").attr("class","u-index");
       if (json.alerts !== undefined){
         $("#alerts").text(json.alerts[0].description);
       }    
@@ -36,9 +36,9 @@
     for (var i = 1; i <= 5; i++){ // display date for the next 5 days
       var date = document.querySelector("#date");
       var p3 = document.createElement("p");
+
       var targetDate = new Date();
       targetDate.setDate(targetDate.getDate() + i);
-
       var dd = targetDate.getDate();
       var mm = targetDate.getMonth() + 1; // 0 is January, so we must add 1
       var yyyy = targetDate.getFullYear();
@@ -96,8 +96,8 @@ $( document ).ready(function() { //function to display response output from API 
         var lon = json.coord.lon;       var lat = json.coord.lat;
         var uv = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=daily,hourly,minutely&appid=" + APIKey;
         $.getJSON(uv, function(json){
-          $("#uv").text("UV Index: ");    $("#uvNum").text(json.current.uvi); $("#uvNum").css("background-color","red");
-          $("#uvNum").css("color","#fff"); $("#uvNum").css("padding","7px 20px"); $("#uvNum").css("border-radius","10%");
+          $("#uv").text("UV Index: ");    $("#uvNum").text(json.current.uvi);
+          $("#uvNum").attr("class","u-index"); 
           if (json.alerts !== undefined){
             $("#alerts").text(json.alerts[0].description);  
           }    
@@ -112,7 +112,7 @@ $( document ).ready(function() { //function to display response output from API 
 
           //create the list with a value and id matching the city you last searched for
           var button = document.createElement("button");  
-          button.style.border = "none";   button.style.margin = "1px"; button.style.padding = "15px 0";
+          button.setAttribute("class", "btn-city")
           button.textContent = city;
 
           //add <li> to unordered list whose id is "history"
@@ -192,7 +192,7 @@ if (listingCity !== null){ //Otherwise an error message would appear if there is
 for (var i = 0; i < listingCity.length; i++){   //To make sure all the history lists appears upon page refresh
         var button = document.createElement("button");
         button.textContent = listingCity[i];
-        button.style.border = "none";   button.style.margin = "1px"; button.style.padding = "15px 0";
+        button.setAttribute("class", "btn-city")
         history.prepend(button);
       } 
     }
@@ -213,8 +213,8 @@ $( document ).ready(function() {
           var lon = json.coord.lon;       var lat = json.coord.lat;
           var uv = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=daily,hourly,minutely&appid=" + APIKey;
           $.getJSON(uv, function(json){
-            $("#uv").text("UV Index: ");    $("#uvNum").text(json.current.uvi); $("#uvNum").css("background-color","red");
-            $("#uvNum").css("color","#fff"); $("#uvNum").css("padding","7px 20px"); $("#uvNum").css("border-radius","10%");
+            $("#uv").text("UV Index: ");    $("#uvNum").text(json.current.uvi);
+            $("#uvNum").attr("class","u-index");
             if (json.alerts !== undefined){
               $("#alerts").text(json.alerts[0].description);
             }    
