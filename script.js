@@ -5,7 +5,6 @@
  const container = document.getElementsByClassName("container-fluid");
  const input = document.getElementById("search-value");
 
- 
  function displayLastResult(){
   
   var weather = "https://api.openweathermap.org/data/2.5/weather?q=" + search_val + "&units=imperial" + "&APPID=" + APIKey;
@@ -17,14 +16,22 @@
     $("#temperature").html("Temperature: " + json.main.temp + " °F"); //shift + option + 8 to get degree symbol on a Mac
     $("#humidity").html("Humidity: " + json.main.humidity + "%");
     $("#wind").html("Wind Speed: " + json.wind.speed + " MPH");
-          
+    
+    var lon = json.coord.lon;       var lat = json.coord.lat;
+    var uv = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=daily,hourly,minutely&appid=" + APIKey;
+    $.getJSON(uv, function(json){
+      $("#uv").text("UV Index: ");    $("#uvNum").text(json.current.uvi); $("#uvNum").css("background-color","red");
+      $("#uvNum").css("color","#fff"); $("#uvNum").css("padding","7px 20px"); $("#uvNum").css("border-radius","10%");
+      if (json.alerts !== undefined){
+        $("#alerts").text(json.alerts[0].description);
+      }    
+    })  
   }); //End of getting the current weather info for city
 
   $.getJSON(forecast,function(json){
     
     var h3 = document.querySelector('h3');
     h3.textContent = "5-day forecast:";
-    h3.style.margin = "10% 0 0 0";
 
     for (var i = 1; i <= 5; i++){ // display date for the next 5 days
       var date = document.querySelector("#date");
@@ -79,7 +86,16 @@ $( document ).ready(function() { //function to display response output from API 
         $("#temperature").html("Temperature: " + json.main.temp + " °F"); //shift + option + 8 to get degree symbol on a Mac
         $("#humidity").html("Humidity: " + json.main.humidity + "%");
         $("#wind").html("Wind Speed: " + json.wind.speed + " MPH");
-    
+        
+        var lon = json.coord.lon;       var lat = json.coord.lat;
+        var uv = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=daily,hourly,minutely&appid=" + APIKey;
+        $.getJSON(uv, function(json){
+          $("#uv").text("UV Index: ");    $("#uvNum").text(json.current.uvi); $("#uvNum").css("background-color","red");
+          $("#uvNum").css("color","#fff"); $("#uvNum").css("padding","7px 20px"); $("#uvNum").css("border-radius","10%");
+          if (json.alerts !== undefined){
+            $("#alerts").text(json.alerts[0].description);  
+          }    
+        })   
         var cityList = JSON.parse(localStorage.getItem("allCities"));
         if(cityList == null){   
           cityList = []; 
@@ -90,7 +106,7 @@ $( document ).ready(function() { //function to display response output from API 
 
           //create the list with a value and id matching the city you last searched for
           var button = document.createElement("button");  
-          button.style.border = "none";   button.style.margin = "5px"; button.style.padding = "15px 0";
+          button.style.border = "none";   button.style.margin = "1px"; button.style.padding = "15px 0";
           button.textContent = city;
 
           //add <li> to unordered list whose id is "history"
@@ -107,7 +123,6 @@ $( document ).ready(function() { //function to display response output from API 
       
         var h3 = document.querySelector('h3');
         h3.textContent = "5-day forecast:";
-        h3.style.margin = "10% 0 0 0";
 
         for (var i = 1; i <= 5; i++){ // display date for the next 5 days
           var date = document.querySelector("#date");
@@ -150,6 +165,8 @@ function clear (){
     $("#temperature").html(""); 
     $("#humidity").html("");
     $("#wind").html("");
+    $("#uv").html("");
+    $("#alerts").html("");
     var h3 = document.querySelector('h3');
     h3.textContent= "";
     date.textContent = "";
@@ -166,7 +183,7 @@ if (listingCity !== null){ //Otherwise an error message would appear if there is
 for (var i = 0; i < listingCity.length; i++){   //To make sure all the history lists appears upon page refresh
         var button = document.createElement("button");
         button.textContent = listingCity[i];
-        button.style.border = "none";   button.style.margin = "5px"; button.style.padding = "15px 0";
+        button.style.border = "none";   button.style.margin = "1px"; button.style.padding = "15px 0";
         history.prepend(button);
       } 
     }
@@ -183,14 +200,22 @@ $( document ).ready(function() {
           $("#temperature").html("Temperature: " + json.main.temp + " °F"); //shift + option + 8 to get degree symbol on a Mac
           $("#humidity").html("Humidity: " + json.main.humidity + "%");
           $("#wind").html("Wind Speed: " + json.wind.speed + " MPH");
-                
+
+          var lon = json.coord.lon;       var lat = json.coord.lat;
+          var uv = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=daily,hourly,minutely&appid=" + APIKey;
+          $.getJSON(uv, function(json){
+            $("#uv").text("UV Index: ");    $("#uvNum").text(json.current.uvi); $("#uvNum").css("background-color","red");
+            $("#uvNum").css("color","#fff"); $("#uvNum").css("padding","7px 20px"); $("#uvNum").css("border-radius","10%");
+            if (json.alerts !== undefined){
+              $("#alerts").text(json.alerts[0].description);
+            }    
+          })          
         }); //End of getting the current weather info for city
 
         $.getJSON(forecast,function(json){
           
           var h3 = document.querySelector('h3');
           h3.textContent = "5-day forecast:";
-          h3.style.margin = "10% 0 0 0";
 
           for (var i = 1; i <= 5; i++){ // display date for the next 5 days
             var date = document.querySelector("#date");

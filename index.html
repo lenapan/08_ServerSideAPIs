@@ -15,12 +15,21 @@
     />
     <title>Weather Dashboard</title>
   </head>
-
+  <style>
+    main {
+      box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+      padding: 40px 20px;
+      margin: 0 0 10px 0;
+      border-radius: 10px;
+    }
+    h3 {
+      margin-top:25px;
+    }
+  </style>
   <body>
     <header class="container-fluid text-center text-white bg-dark p-2">
       <h1>Weather Dashboard</h1>
     </header>
-
     <div class="container-fluid">
       <div class="row">
         <aside class="col-lg-3 bg-light">
@@ -31,34 +40,41 @@
               <i class="fa fa-search"></i>
             </button>
           </div>
-
           <ul class="list-group history" id="history"></ul>
         </aside>
 
         <div class="col-lg-9">
-          <div id="today" class="mt-3">
-            <h2><span id="city"></span> <span id ="currentDay"></span><img id="weather_image" src=""></h2>
-          </div>
-          <div class="mt-3">
-            <span id="temperature"></span>
-          </div>
-          <div class="mt-3">
-            <span id="humidity"></span>
-          </div>
-          <div class="mt-3">
-            <span id="wind"></span>
-          </div>
-
+          <main>
+              <div id="today" class="mt-3">
+                <h2><span id="city"></span> <span id ="currentDay"></span><img id="weather_image" src=""></h2>
+              </div>
+              <div class="mt-3">
+                <span id="temperature"></span>
+              </div>
+              <div class="mt-3">
+                <span id="humidity"></span>
+              </div>
+              <div class="mt-3">
+                <span id="wind"></span>
+              </div>
+              <div class="mt-3">
+                <span id="uv"></span><span id="uvNum"></span>
+              </div>
+              <div class="mt-3">
+                <span id="alerts"></span>
+              </div>
+          </main>
           <h3></h3>
-          <div id="date" class="row mt-3">         </div>
-          <div id="icon" class="row mt-3">         </div>
-          <div id="forecast" class="row mt-3">     </div>
-          <div id="forecast2" class="row mt-3">    </div>
-
+          <section class="forecast">    
+            <div id="date" class="row mt-3">         </div>
+            <div id="icon" class="row mt-2">         </div>
+            <div id="forecast" class="row mt-2">     </div>
+            <div id="forecast2" class="row mt-2">    </div>
+          </section>
         </div>
       </div>
     </div>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="script.js"></script>
