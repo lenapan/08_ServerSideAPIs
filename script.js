@@ -38,9 +38,15 @@
       var p3 = document.createElement("p");
       var targetDate = new Date();
       targetDate.setDate(targetDate.getDate() + i);
+
+      var dd = targetDate.getDate();
+      var mm = targetDate.getMonth() + 1; // 0 is January, so we must add 1
+      var yyyy = targetDate.getFullYear();
+      var dateString = mm + "/" + dd + "/" + yyyy;
+
       date.appendChild(p3);
-      p3.textContent = targetDate;
-      p3.setAttribute("class", "col");
+      p3.textContent = dateString;
+      p3.setAttribute("class", "col c c1");   
     } 
     for (var i = 0; i < 5; i++){ // weather icon
       var icon = document.querySelector("#icon");
@@ -49,20 +55,20 @@
       p0.appendChild(img);
       icon.appendChild(p0);
       img.setAttribute("src", "https://openweathermap.org/img/w/" + json.list[i].weather[0].icon + ".png"); 
-      p0.setAttribute("class", "col");
+      p0.setAttribute("class", "col c");   
     } 
     for (var i = 0; i < 5; i++){ // 5 day forecast for temperature in °F
       var forecast = document.querySelector("#forecast");
       var p = document.createElement("p");
       forecast.appendChild(p);
       p.textContent = json.list[i].temp.day + " °F";
-      p.setAttribute("class", "col"); 
+      p.setAttribute("class", "col c");   
     }  
     for (var i = 0; i < 5; i++){ //5 day forecast for humidity
       var p2 = document.createElement("p");
       forecast2.appendChild(p2);
       p2.textContent = json.list[i].humidity + " %";
-      p2.setAttribute("class", "col");      
+      p2.setAttribute("class", "col c c2");     
     }     
   }); //End of function to get 5 day forecast
 }
@@ -116,9 +122,6 @@ $( document ).ready(function() { //function to display response output from API 
         if(cityList.length < 2){location.reload();}                
     }); //End of getting the current weather info for city
 
-      //  console.log(weather);
-      //  console.log(forecast); 
-
     $.getJSON(forecast,function(json){
       
         var h3 = document.querySelector('h3');
@@ -129,9 +132,15 @@ $( document ).ready(function() { //function to display response output from API 
           var p3 = document.createElement("p");
           var targetDate = new Date();
           targetDate.setDate(targetDate.getDate() + i);
+          
+          var dd = targetDate.getDate();
+          var mm = targetDate.getMonth() + 1; // 0 is January, so we must add 1
+          var yyyy = targetDate.getFullYear();
+          var dateString = mm + "/" + dd + "/" + yyyy;
+
           date.appendChild(p3);
-          p3.textContent = targetDate;
-          p3.setAttribute("class", "col");
+          p3.textContent = dateString;
+          p3.setAttribute("class", "col c c1");
         } 
         for (var i = 0; i < 5; i++){ // weather icon
           var icon = document.querySelector("#icon");
@@ -140,20 +149,20 @@ $( document ).ready(function() { //function to display response output from API 
           p0.appendChild(img);
           icon.appendChild(p0);
           img.setAttribute("src", "https://openweathermap.org/img/w/" + json.list[i].weather[0].icon + ".png"); 
-          p0.setAttribute("class", "col");
+          p0.setAttribute("class", "col c");
         } 
         for (var i = 0; i < 5; i++){ // 5 day forecast for temperature in °F
           var forecast = document.querySelector("#forecast");
           var p = document.createElement("p");
           forecast.appendChild(p);
           p.textContent = json.list[i].temp.day + " °F";
-          p.setAttribute("class", "col"); 
+          p.setAttribute("class", "col c"); 
         }  
         for (var i = 0; i < 5; i++){ //5 day forecast for humidity
           var p2 = document.createElement("p");
           forecast2.appendChild(p2);
           p2.textContent = json.list[i].humidity + " %";
-          p2.setAttribute("class", "col");      
+          p2.setAttribute("class", "col c c2");      
         }  
         input.value = "";   //clear previous search in <input> once response is complete      
       });   //End of function to get 5 day forecast
@@ -222,9 +231,15 @@ $( document ).ready(function() {
             var p3 = document.createElement("p");
             var targetDate = new Date();
             targetDate.setDate(targetDate.getDate() + i);
+
+            var dd = targetDate.getDate();
+            var mm = targetDate.getMonth() + 1; // 0 is January, so we must add 1
+            var yyyy = targetDate.getFullYear();
+            var dateString = mm + "/" + dd + "/" + yyyy;
+
             date.appendChild(p3);
-            p3.textContent = targetDate;
-            p3.setAttribute("class", "col");
+            p3.textContent = dateString;
+            p3.setAttribute("class", "col c c1");
           } 
           for (var i = 0; i < 5; i++){ // weather icon
             var icon = document.querySelector("#icon");
@@ -233,20 +248,20 @@ $( document ).ready(function() {
             p0.appendChild(img);
             icon.appendChild(p0);
             img.setAttribute("src", "https://openweathermap.org/img/w/" + json.list[i].weather[0].icon + ".png"); 
-            p0.setAttribute("class", "col");
+            p0.setAttribute("class", "col c");
           } 
           for (var i = 0; i < 5; i++){ // 5 day forecast for temperature in °F
             var forecast = document.querySelector("#forecast");
             var p = document.createElement("p");
             forecast.appendChild(p);
             p.textContent = json.list[i].temp.day + " °F";
-            p.setAttribute("class", "col"); 
+            p.setAttribute("class", "col c"); 
           }  
           for (var i = 0; i < 5; i++){ //5 day forecast for humidity
             var p2 = document.createElement("p");
             forecast2.appendChild(p2);
             p2.textContent = json.list[i].humidity + " %";
-            p2.setAttribute("class", "col");      
+            p2.setAttribute("class", "col c c2");      
           }  
         }); //End of function to get 5 day forecast
     })  //End of addEventListener "click"
