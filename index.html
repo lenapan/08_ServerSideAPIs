@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
+    <meta name="description"
+          content="Author: Lena Pan, Summary: An introductory hands-on and self-teaching lesson on API integration.">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="style.css">
@@ -19,12 +20,12 @@
         <aside class="col-lg-3 bg-light">
           <h5 class="mt-1">Search for a City:</h5>
           <div class="form-inline form-group">
-            <input class="form-control" type="text" id="search-value" />
-            <button class="btn btn-primary button" id="search-button">
+            <input class="form-control" type="text" id="search-value" placeholder="city" />
+            <button class="btn btn-primary button" id="search-button" aria-label="Search a city for weather details">
               <i class="fa fa-search"></i>
             </button>
           </div>
-          <ul class="list-group history" id="history"></ul>
+          <address class="list-group history" id="history"></address>
         </aside>
 
         <div class="col-lg-9">
@@ -62,6 +63,7 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="script.js"></script>
+    <!-- <script src="jQueryVersion.js"></script> -->
     
   </body>
 </html>

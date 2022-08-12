@@ -17,7 +17,7 @@ const fiveDay = document.querySelector('h3');
 function renderToday(json){
 
     city.innerHTML = `${json.name}`; today.innerHTML = now
-    img.src = `https://openweathermap.org/img/w/${json.weather[0].icon}.png`
+    img.src = `https://openweathermap.org/img/w/${json.weather[0].icon}.png`;   img.setAttribute("alt", json.weather[0].description)
     temp.innerHTML = `Temperature: ${json.main.temp}°F`
     humid.innerHTML = `Humidity: ${json.main.humidity}%`
     wind.innerHTML = `Wind Speed: ${json.wind.speed} MPH`
@@ -61,23 +61,24 @@ function renderForecast(json){
         five.textContent = dateString;
         five.setAttribute("class", "col c c1");   
     } 
-    for (let i = 0; i < 5; i++){ // weather icon
+    for (let i = 0; i < 5; i+=1){ 
+    // weather icon
         let icon = document.querySelector("#icon");
         let img = document.createElement("img");
         let w = document.createElement("p");
         w.appendChild(img);
         icon.appendChild(w);
-        img.setAttribute("src", "https://openweathermap.org/img/w/" + json.list[i].weather[0].icon + ".png"); 
+        img.setAttribute("src", `https://openweathermap.org/img/w/${json.list[i].weather[0].icon}.png`); img.setAttribute("alt", json.list[i].weather[0].description)
         w.setAttribute("class", "col c");   
-    } 
-    for (let i = 0; i < 5; i++){ // 5 day forecast for temperature in °F
+    
+    // 5 day forecast for temperature in °F
         let forecast = document.querySelector("#forecast");
         let temp = document.createElement("p");
         forecast.appendChild(temp);
         temp.textContent = json.list[i].temp.day + " °F";
         temp.setAttribute("class", "col c");   
-    }  
-    for (let i = 0; i < 5; i++){ //5 day forecast for humidity
+     
+    //5 day forecast for humidity
         let hu = document.createElement("p");
         forecast2.appendChild(hu);
         hu.textContent = json.list[i].humidity + " %";
@@ -85,9 +86,7 @@ function renderForecast(json){
     }     
 }
 function displayLastResult(){
-    const weather = "https://api.openweathermap.org/data/2.5/weather?q=" + input.value + "&units=imperial" + "&APPID=" + APIKey;
-    const forecast = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + input.value  + "&cnt=5" + "&units=imperial" + "&appid=" + APIKey;
-    
+    const weather = "https://api.openweathermap.org/data/2.5/weather?q=" + input.value + "&units=imperial" + "&APPID=" + APIKey;  
     fetch(weather)  //Today's weather
         .then((response) => {
             return response.json();
@@ -113,7 +112,7 @@ function displayLastResult(){
                 }             
             localStorage.setItem("allCities", JSON.stringify(cityList)); //save new city list    
         })
-
+    const forecast = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + input.value  + "&cnt=5" + "&units=imperial" + "&appid=" + APIKey;
     fetch(forecast) //Five day forecast
         .then((response) => {
             return response.json();
@@ -122,7 +121,6 @@ function displayLastResult(){
             renderForecast(json)
         })
 }
-
 const button = document.querySelector('#search-button')
 button.addEventListener('click', displayLastResult)
 
