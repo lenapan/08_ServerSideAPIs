@@ -106,7 +106,7 @@ function displayLastResult(){
             let hBtn = document.createElement("button");  
             hBtn.setAttribute("class", "btn-city")
             hBtn.textContent = city;
-
+            
             //add <li> to unordered list whose id is "history"
             history.prepend(hBtn);
                 }             
@@ -147,11 +147,22 @@ function clear(){
     forecast.textContent = ""; //Temp
     forecast2.textContent =""; //Humidity
 }
+//Clear input and include dropdown menu of previous searches
+let datalist = document.querySelector("datalist");
 input.addEventListener("click", function(){
+    let inputValue = JSON.parse(localStorage.getItem("allCities"));
     input.value = ""
-    button.addEventListener('click', clear) //clear previous results before outputting new ones  
+    if (inputValue !== null && datalist.childElementCount < inputValue.length){ //Otherwise an error message would appear if there is nothing in the array yet.
+        for (let i = 0; i < inputValue.length; i++){    
+            let option = document.createElement("option")
+            datalist.prepend(option)
+            option.value = inputValue[i]
+            console.log(inputValue[i])
+        }
+        console.log("")
+    }
+    button.addEventListener('click', clear) //clear previous DOM results before outputting new ones  
 }) 
-
 //If page refreshes, load the last searched city
 let localStor = JSON.parse(localStorage.getItem("allCities")); 
 if (localStor !== null){
@@ -164,13 +175,14 @@ const history = document.querySelector(".history");
 let listingCity = JSON.parse(localStorage.getItem("allCities"));
 
 if (listingCity !== null){ //Otherwise an error message would appear if there is nothing in the array yet.
-    for (var i = 0; i < listingCity.length; i++){   //To make sure all the history lists appears upon page refresh
+    for (let i = 0; i < listingCity.length; i++){   //To make sure all the history lists appears upon page refresh
             let hBtn = document.createElement("button");
             hBtn.textContent = listingCity[i];
             hBtn.setAttribute("class", "btn-city")
             history.prepend(hBtn);
         } 
 }
+//HTML input options based on previously search history
 history.addEventListener("click", function(list){
     clear()
     input.value = list.target.textContent;
